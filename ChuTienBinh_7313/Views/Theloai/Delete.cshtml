@@ -1,0 +1,38 @@
+﻿@model ChuTienBinh_7313.Models.TheLoai
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/dohoaIndexSach.css" rel="stylesheet" />
+<h2>Xóa Thể Loại</h2>
+
+<h3>Bạn có chắc sẽ muốn xóa thể loại "@Html.DisplayFor(model => model.tenloai)"</h3>
+<div>
+    <h4>Thể Loại</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tenloai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenloai)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-default" style="margin-top:5px;margin-bottom:5px;border-color:black;border-style:solid" />
+    <div>
+        <button class="huhuhu hohoho">
+            <a href="@Url.Action("Index")" style="text-decoration:none; color:white;">Quay lại danh sách</a>
+        </button>
+        @* @Html.ActionLink("Back to List", "Index")*@
+    </div>
+</div>
+    }
+</div>

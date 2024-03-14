@@ -1,0 +1,110 @@
+﻿@model ChuTienBinh_7313.Models.Sach
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/dohoaIndexSach.css" rel="stylesheet" />
+<script>
+    function openFolder() {
+        //var fileInput = document.createElement('input');
+        //fileInput.type = 'file';
+        //fileInput.accept = 'image/*';
+        //fileInput.multiple = false;
+
+        //fileInput.onchange = function (e) {
+        //    var file = e.target.files[0];
+        //    var reader = new FileReader();
+
+        //    reader.onload = function (event) {
+        //        var url = event.target.result;
+        //        document.getElementById('hinh').value = url;
+        //        document.getElementById('bookCover').src = url;
+        //    };
+
+        //    reader.readAsDataURL(file);
+        //};
+
+        //fileInput.click();
+        var imageFolder = "images/";
+
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.multiple = false;
+
+        fileInput.onchange = function (e) {
+            var file = e.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (event) {
+                var fileName = file.name; // Tên của tệp
+                var url = event.target.result;
+                var imagePath = imageFolder + fileName; // Đường dẫn tương đối từ thư mục gốc đến thư mục chứa hình ảnh
+                document.getElementById('hinh').value = "/Content/" + imagePath;
+                document.getElementById('bookCover').src = url;
+            };
+
+            reader.readAsDataURL(file);
+        };
+
+        fileInput.click();
+    }
+</script>
+<h2>Sửa Sách</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Sách</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.masach)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.maloai, "Mã Loại", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.maloai, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.maloai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tensach, "Tên Sách", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tensach, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tensach, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hinh, "Hình Ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.hinh, new { htmlAttributes = new { @class = "form-control", @id = "hinh" } })
+                <img id="bookCover" src="@Model.hinh" alt="Alternate Text" />
+                @Html.ValidationMessageFor(model => model.hinh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu" class="btn btn-default" style="margin-top:5px;margin-bottom:5px;border-color:black;border-style:solid" />
+                <button type="button" onclick="openFolder()" class="btn btn-default" style="margin-top:5px;margin-bottom:5px;border-color:black;border-style:solid">Thư mục</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <button class="huhuhu hohoho">
+        <a href="@Url.Action("Index")" style="text-decoration:none; color:white;">Quay lại danh sách</a>
+    </button>
+    @* @Html.ActionLink("Back to List", "Index")*@
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

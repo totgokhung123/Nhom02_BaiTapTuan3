@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ChuTienBinh_7313.Models.TheLoai>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/dohoaIndexSach.css" rel="stylesheet" />
+<h2>Trang Chủ</h2>
+
+<p>
+    <div><button onclick="location.href='@Url.Action("Create")'" class="create-button">Thêm mới</button></div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tenloai)*@
+            <h6>Tên Loại</h6>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenloai)
+        </td>
+        <td>
+            <div class="btnchucnang">
+                <button class="huhuhu hohoho">
+                    <a href="@Url.Action("Edit", new { id = item.maloai })" style="text-decoration:none; color:white;">Sửa Sách</a>
+                </button>
+                <button class="huhuhu hohoho">
+                    <a href="@Url.Action("Detail", new { id = item.maloai })" style="text-decoration:none; color:white;">Chi Tiết</a>
+                </button>
+                <button class="huhuhu hohoho">
+                    <a href="@Url.Action("Delete", new { id = item.maloai })" style="text-decoration:none; color:white;">Xóa Sách</a>
+                </button>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

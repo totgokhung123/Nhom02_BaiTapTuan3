@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ChuTienBinh_7313.Models.Sach>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/dohoaIndexSach.css" rel="stylesheet" />
+<h2>Trang Chủ</h2>
+<p>
+    <div><button onclick="location.href='@Url.Action("Create")'" class="create-button">Thêm mới</button></div>
+</p>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.maloai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tensach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hinh)
+        </th>
+        <th></th>
+    </tr>*@
+
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.maloai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tensach)
+            </td>
+            <td>
+
+                <img src="@item.hinh" alt="Alternate Text" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.masach }) |
+                @Html.ActionLink("Details", "Detail", new { id = item.masach }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.masach })
+            </td>
+        </tr>
+    }
+
+</table>*@
+@*<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    @foreach (var item in Model)
+                    {
+                        <div class="card">
+                            <div>@item.tensach</div>
+                            <img src="@item.hinh" class="card-img-top" alt="Book Cover" />
+                        </div>
+                        <div class="card-body">
+                            <div>                              
+                                @Html.ActionLink("Edit", "Edit", new { id = item.masach }) |
+                                @Html.ActionLink("Details", "Detail", new { id = item.masach }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.masach })
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>*@
+<div class="book-container">
+    @foreach (var item in Model)
+    {
+        <div class="book-card">
+            <div class="book-image">
+                <img src="@item.hinh" alt="Book Cover" />
+            </div>
+
+            <div class="noidung">
+                <h5 style="margin-top:8px">Tên sách: @item.tensach</h5>
+                <p>Thể loại: @item.TheLoai.tenloai</p>
+            </div>
+            
+            <div class="btnchucnang">
+                <button class="huhuhu hohoho">
+                    <a href="@Url.Action("Edit", new { id = item.masach })" style="text-decoration:none; color:white;">Sửa</a>
+                </button> 
+                <button class="huhuhu hohoho" >
+                    <a href="@Url.Action("Detail", new { id = item.masach })" style="text-decoration:none; color:white;">Chi Tiết</a>
+                </button> 
+                <button class="huhuhu hohoho">
+                    <a href="@Url.Action("Delete", new { id = item.masach })" style="text-decoration:none; color:white;">Xóa</a>
+                </button> 
+            </div>
+        </div>
+    }
+</div>
